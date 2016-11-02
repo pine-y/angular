@@ -1,0 +1,74 @@
+angular.module('myapp',['ng','ngRoute'])
+.config(function($routeProvider){
+	$routeProvider
+	.when('/home',{
+		templateUrl:'tpl/home.html',
+		controller:'homectrl'
+	})
+	.when('/main',{
+		templateUrl:'tpl/main.html',
+		controller:'mainctrl'
+	})
+	.when('/yoself',{
+		templateUrl:'tpl/yoself.html',
+		controller:'yoselfctrl'
+	})
+	.when('/intde/:mid',{
+		templateUrl:'tpl/intde.html',
+		controller:'intdectrl'
+	})
+	.when('/shop/:inid',{
+		templateUrl:'tpl/shop.html',
+		controller:'shopctrl'
+	})
+	.otherwise({
+		redirectTo:'/home'
+	})
+})
+	.controller('myctrl',function($scope,$location){
+		$scope.jump1=function(){
+			$location.path('/main')
+		}
+		
+	})
+	.controller('homectrl',function($scope,$location){
+		
+	})
+	.controller('mainctrl',function($scope,$location,$http){
+		$http.get('data/list.json').success(function(data){
+					$scope.sub=data;
+				});
+		$scope.loadmore=function(){
+		$http.get('data/list.json').success(function(data){
+					$scope.sub=$scope.sub.concat(data);
+				})
+		}
+	})
+	.controller('yoselfctrl',function($scope,$location){
+
+	})
+	.controller('intdectrl',function($scope,$http,$routeParams){
+		$scope.inid=$routeParams.mid;
+		$http.get('data/list.json').success(function(data){
+			for(var i=0;i<data.length;i++){
+				if($scope.inid==data[i].id){
+					$scope.dname=data[i].name;
+					$scope.dimg=data[i].img;
+					$scope.dmaterial=data[i].material;
+					$scope.ddetail=data[i].detail;
+				}
+			}
+		})
+	})
+	.controller('shopctrl',function($scope,$http,$routeParams){
+		$scope.spid=$routeParams.inid;
+		$http.get('data/list.json').success(function(data){
+			for(var i=0;i<data.length;i++){
+				if($scope.spid==data[i].id){
+					$scope.spname=data[i].name;
+					$scope.spimg=data[i].img;
+					$scope.spidm=data[i].idm;
+				}
+			}
+		})
+	})
