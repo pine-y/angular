@@ -27,11 +27,11 @@ ul li{
 .row{
 	text-align: center;
 }
+.ho-div{
+	text-align: center;
+}
 .img1{
 	width: 100%;
-}
-.h2{
-	text-align: center;
 }
 .img2{
 	width: 100px;
@@ -47,7 +47,7 @@ ul li{
 	background:#DCDCDC;
 }
 .ye-div{
-	margin-top:20px;
+	margin-top:10%;
 	padding-left: 10px;
 }
 .ye-div p a{
@@ -56,5 +56,5 @@ ul li{
 }
 .ye-div p span{
 	margin-right:15%;
-	/*background: red;*/
+	
 }
